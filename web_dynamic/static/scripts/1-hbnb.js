@@ -1,19 +1,20 @@
-//
-$(function() {
-    let list = [];
-     $('input').change(function(){
-	if(this.checked){
-	    let thing = $(this).attr('data-name');
-	    console.log(thing);
-	    list.push($('input.data-id'));
-	    $('.amenities h4').text(thing);
-	}
-	else {
-	    if($('input.data-id') in list) {
-		let trash = list.indexOf($('input.data-id'));
-		list.remove[trash];
-		$('div.amenities h4').text(list);
-	    };
-	};
-    });
+//checkbox and display amenities
+$(function () {
+  let dict = {};
+  $('input').change(function () {
+    if (this.checked) {
+      dict[($(this).attr('data-id'))] = $(this).attr('data-name');
+    } else {
+      delete dict[$(this).attr('data-id')];
+    }
+    let arr = '';
+    let separator = '';
+    for (let i in dict) {
+      console.log(i);
+      arr += separator;
+      arr += dict[i];
+      separator = ', ';
+    }
+    $('div.amenities h4').text(arr);
+  });
 });
