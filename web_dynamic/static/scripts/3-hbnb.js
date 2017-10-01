@@ -8,6 +8,7 @@ $(function () {
   success: function (result) {
     console.log(result);
     for (let i in result){
+      console.log(result[i].description)
       let structure = [
         '<article>',
           '<div class="title">',
@@ -18,17 +19,17 @@ $(function () {
 	    '<div class="max_guest">',
 	      '<i class="fa fa-users fa-3x" aria-hidden="true"></i>',
               '<br />',
-              result[i].max_guest + 'Guests',
+              result[i].max_guest + ' Guests',
             '</div>',
 	    '<div class="number_rooms">',
 	      '<i class="fa fa-bed fa-3x" aria-hidden="true"></i>',
               '<br />',
-              result[i].number_rooms + 'Bedrooms',
+              result[i].number_rooms + ' Bedrooms',
             '</div>',
 	    '<div class="number_bathrooms">',
 	      '<i class="fa fa-bath fa-3x" aria-hidden="true"></i>',
               '<br />',
-              result[i].number_bathrooms + 'Bathroom',
+              result[i].number_bathrooms + ' Bathroom',
             '</div>',
 	  '</div>',
 	  '<div class="description">',
