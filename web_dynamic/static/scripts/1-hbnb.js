@@ -1,4 +1,4 @@
-//checkbox and display amenities
+// checkbox and display amenities
 $(function () {
   let dict = {};
   $('input').change(function () {
