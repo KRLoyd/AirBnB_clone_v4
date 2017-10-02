@@ -1,223 +1,118 @@
-<img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/HBTN-hbnb-Final.png" width="160" height=auto />
+# AirBnB Clone v4 (The Holberton B&B)
+![](https://github.com/johncoleman83/AirBnB_clone/raw/master/dev/HBTN-hbnb-Final.png)
 
-# AirBnB Clone: Phase # 3
+![N|Solid](https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png)
 
-: API with Swagger
+### Description
+Project attempts to clone the the AirBnB application and website, including the database, storage, RESTful API, Web Framework, and Front End.
 
-## Description
+### Concepts learned for phase 4:
+* How to modify an HTML element style
+* How to get and update an HTML element content
+* How to modify the DOM
+* How to make a GET request with jQuery Ajax
+* How to make a POST request with jQuery Ajax
+* How to listen/bind to DOM events
+* How to listen/bind to user events
 
-Project attempts to clone the the AirBnB application and website, including the
-database, storage, RESTful API, Web Framework, and Front End.  Currently the
-application is designed to run with 2 storage engine models:
+### Environment
+Our AirBnB clone has been tested on Ubuntu 14.05.5 LTS
+Tests done in VirtualBox on [Ubuntu](https://atlas.hashicorp.com/ubuntu/boxes/trusty64) via [Vagrant](https://www.vagrantup.com/)(1.9.1)
 
-* File Storage Engine:
+### The console functionality
+* create your data model
+* manage (create, update, destroy, etc) objects via a console / command interpreter
+* store and persist objects to a file (JSON file)
 
-  * `/models/engine/file_storage.py`
-
-* Database Storage Engine:
-
-  * `/models/engine/db_storage.py`
-
-  * To Setup the DataBase for testing and development, there are 2 setup
-  scripts that setup a database with certain privileges: `setup_mysql_test.sql`
-  & `setup_mysql_test.sql` (for more on setup, see below).
-
-  * The Database uses Environmental Variables for tests.  To execute tests with
-  the environmental variables prepend these declarations to the execution
-  command:
-
+## Console Execution
+First step is to clone the repository into your directory:
+``` 
+$ git clone https://github.com/halinav00/AirBnB_clone.git 
 ```
-$ HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd \
-HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
-[COMMAND HERE]
-```
-
-## Environment
-
-* __OS:__ Ubuntu 14.04 LTS
-* __language:__ Python 3.4.3
-* __web server:__ nginx/1.4.6
-* __application server:__ Flask 0.12.2, Jinja2 2.9.6
-* __web server gateway:__ gunicorn (version 19.7.1)
-* __database:__ mysql Ver 14.14 Distrib 5.7.18
-* __documentation:__ Swagger (flasgger==0.6.6)
-* __style:__
-  * __python:__ PEP 8 (v. 1.7.0)
-  * __web static:__ [W3C Validator](https://validator.w3.org/)
-  * __bash:__ ShellCheck 0.3.3
-
-<img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/hbnb_step5.png" />
-
-## Configuration Files
-
-The `/config/` directory contains configuration files for `nginx` and the
-Upstart scripts.  The nginx configuration file is for the configuration file in
-the path: `/etc/nginx/sites-available/default`.  The enabled site is a sym link
-to that configuration file.  The upstart script should be saved in the path:
-`/etc/init/[FILE_NAME.conf]`.  To begin this service, execute:
-
-```
-$ sudo start airbnb.conf
-```
-This script's main task is to execute the following `gunicorn` command:
-
-```
-$ gunicorn --bind 127.0.0.1:8001 wsgi.wsgi:web_flask.app
-```
-
-The `gunicorn` command starts an instance of a Flask Application.
-
----
-
-### Web Server Gateway Interface (WSGI)
-
-All integration with gunicorn occurs with `Upstart` `.conf` files.  The python
-code for the WSGI is listed in the `/wsgi/` directory.  These python files run
-the designated Flask Application.
-
-## Setup
-
-This project comes with various setup scripts to support automation, especially
-during maintanence or to scale the entire project.  The following files are the
-setupfiles along with a brief explanation:
-
-* **`dev/setup.sql`:** Drops test and dev databases, and then reinitializes
-the datbase.
-
-  * Usage: `$ cat dev/setup.sql | mysql -uroot -p`
-
-* **`setup_mysql_dev.sql`:** initialiezs dev database with mysql for testing
-
-  * Usage: `$ cat setup_mysql_dev.sql | mysql -uroot -p`
-
-* **`setup_mysql_test.sql`:** initializes test database with mysql for testing
-
-  * Usage: `$ cat setup_mysql_test.sql | mysql -uroot -p`
-
-* **`0-setup_web_static.sh`:** sets up nginx web server config file & the file
-  structure.
-
-  * Usage: `$ sudo ./0-setup_web_static.sh`
-
-* **`3-deploy_web_static.py`:** uses 2 functions from (1-pack_web_static.py &
-  2-do_deploy_web_static.py) that use the fabric3 python integration, to create
-  a `.tgz` file on local host of all the local web static fils, and then calls
-  the other function to deploy the compressed web static files.  Command must
-  be executed from the `AirBnB_clone` root directory.
-
-  * Usage: `$ fab -f 3-deploy_web_static.py deploy -i ~/.ssh/holberton -u ubuntu`
-
-## Testing
-
-### `unittest`
-
-This project uses python library, `unittest` to run tests on all python files.
-All unittests are in the `./tests` directory with the command:
-
-* File Storage Engine Model:
-
-  * `$ python3 -m unittest discover -v ./tests/`
-
-* DataBase Storage Engine Model
-
-```
-$ HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd \
-HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
-python3 -m unittest discover -v ./tests/
-```
-
----
-
-### All Tests
-
-The bash script `init_test.sh` executes all these tests for both File Storage &
-DataBase Engine Models:
-
-  * checks `pep8` style
-
-  * runs all unittests
-
-  * runs all w3c_validator tests
-
-  * cleans up all `__pycache__` directories and the storage file, `file.json`
-
-  * **Usage `init_test.sh`:**
-
-```
-$ ./dev/init_test.sh
-```
-
----
-
-### CLI Interactive Tests
-
-* This project uses python library, `cmd` to run tests in an interactive command
-  line interface.  To begin tests with the CLI, run this script:
-
-#### File Storage Engine Model
-
+To run the console, type `./console.py` script. 
 ```
 $ ./console.py
 ```
-
-#### To execute the CLI using the Database Storage Engine Model:
-
+Type `help` for list of commands.
 ```
-$ HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd \
-HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db \
-./console.py
-```
-
-#### For a detailed description of all tests, run these commands in the CLI:
-
-```
-(hbnb) help help
-List available commands with "help" or detailed help with "help cmd".
 (hbnb) help
 
 Documented commands (type help <topic>):
 ========================================
-Amenity    City  Place   State  airbnb  create   help  show
-BaseModel  EOF   Review  User   all     destroy  quit  update
+EOF  all  create  destroy  help  quit  show  update
 
-(hbnb) help User
-class method with .function() syntax
-        Usage: User.<command>(<id>)
-(hbnb) help create
-create: create [ARG] [PARAM 1] [PARAM 2] ...
-        ARG = Class Name
-        PARAM = <key name>=<value>
-                value syntax: "<value>"
-        SYNOPSIS: Creates a new instance of the Class from given input ARG
-                  and PARAMS. Key in PARAM = an instance attribute.
-        EXAMPLE: create City name="Chicago"
-                 City.create(name="Chicago")
+(hbnb)
 ```
 
-* Tests in the CLI may also be executed with this syntax:
+Commands include:
+* `create`: creates a new instance of model (you need to specify class for the model)
+* `show`: shows information about a model based on id
+* `destroy`: delete model
+* `all`: display information about all models
+* `update`: updates instance based on name, id and attribute
+* `quit`: exits
 
-  * **destroy:** `<class name>.destroy(<id>)`
 
-  * **update:** `<class name>.update(<id>, <attribute name>, <attribute value>)`
+## API execution:
+on port 5000:
+```
+guillaume@ubuntu:~/AirBnB_v4$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.0-hbnb
+* Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+```
+API execution on port 5001:
+```
+guillaume@ubuntu:~/AirBnB_v4$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db HBNB_API_PORT=5001 python3 -m api.v1.app
+...
+```
 
-  * **update with dictionary:** `<class name>.update(<id>,
-    <dictionary representation>)`
+**Examples of front end:**:
 
----
+![](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/309/hbnb_2_0.jpg)
 
-### Continuous Integration Tests
+![](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/309/hbnb_1_2.jpg)
 
-Uses [Travis-CI](https://travis-ci.org/) to run all tests on all commits to the
-github repo
+**Examples of console use:**
+```
+(hbnb) create User
+3db5637d-5df4-44cf-a250-ef2b523946e9
+(hbnb) show User 3db5637d-5df4-44cf-a250-ef2b523946e9
+[User] (3db5637d-5df4-44cf-a250-ef2b523946e9) {'id': '3db5637d-5df4-44cf-a250-ef2b523946e9', 
+       'updated_at': datetime.datetime(2017, 6, 13, 4, 18, 50, 138053), 'created_at': 
+       datetime.datetime(2017, 6, 13, 4, 18, 50, 138027)}
+(hbnb) destroy User 3db5637d-5df4-44cf-a250-ef2b523946e9
+(hbnb) show User 3db5637d-5df4-44cf-a250-ef2b523946e9
+** no instance found **
+(hbnb)
+```
+
+#### README resourses for previous phases:
+* [AirBnB clone phase 1  -  README](https://github.com/johncoleman83/AirBnB_clone/blob/master/README.md)
+* [AirBnB clone phase 2 -  README](https://github.com/kjowong/AirBnB_clone_v2/blob/master/README.md)
+* [AirBnB clone phase 3 -  README](https://github.com/johncoleman83/AirBnB_clone_v3/blob/master/README.md)
+
+### Known Bugs
+If found - call exterminator
 
 ## Authors
 
+code base phase #1:
 * MJ Johnson, [@mj31508](https://github.com/mj31508)
-* David John Coleman II, [davidjohncoleman.com](http://www.davidjohncoleman.com/) | [@djohncoleman](https://twitter.com/djohncoleman)
-* Kimberly Wong, [kjowong](https://github.com/kjowong) | [@kjowong](https://twitter.com/kjowong) | [kjowong@gmail.com](kjowong@gmail.com)
-* Carrie Ybay, [hicarrie](https://github.com/hicarrie) | [@hicarrie_](https://twitter.com/hicarrie_)
+* David John Coleman II, [davidjohncoleman.com](http://www.davidjohncoleman.com/)
+
+code base phase #2
+* Kimberly Wong, [kjowong](http://github.com/kjowong) | [@kjowong](http://twitter.com/kjowong) | [kjowong@gmail.com](kjowong@gmail.com)
+* Carrie Ybay, [hicarrie](http://github.com/hicarrie) | [@hicarrie_](http://twitter.com/hicarrie_)
+
+code base phase #3
+* David John Coleman II, [davidjohncoleman.com](http://www.davidjohncoleman.com/)
 * Jared Heck, [jarehec](https://github.com/jarehec) | [@jarehec](https://twitter.com/jarehec)
+
+current phase:
+* Kristen Loyd, [@KRLoyd](https://github.com/KRLoyd)
+* Halina Veratsennik, [halinav00](http://github.com/halinav00)
 
 ## License
 
-MIT License
+Public Domain, no copyright protection
+
+*Feedback and contributors are welcomed. Reach out to either authors*
