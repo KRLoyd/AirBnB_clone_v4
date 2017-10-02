@@ -1,7 +1,7 @@
 # AirBnB Clone v4 (The Holberton B&B)
-![](https://github.com/johncoleman83/AirBnB_clone/raw/master/dev/HBTN-hbnb-Final.png)
+![](https://github.com/johncoleman83/AirBnB_clone/raw/master/dev/HBTN-hbnb-Final.png){:width="200px"}
 
-![N|Solid](https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png)
+![N|Solid](https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png){:width="600px"}
 
 ### Description
 Project attempts to clone the the AirBnB application and website, including the database, storage, RESTful API, Web Framework, and Front End.
