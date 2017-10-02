@@ -44,6 +44,7 @@ $(function () {
       data: JSON.stringify(postDict),
       success: function (result) {
         console.log('POST result: ' + JSON.stringify(result));
+        $("article").remove();
         for (let i in result) {
           let structure = [
             '<article>',
