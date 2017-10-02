@@ -1,8 +1,6 @@
 $(function () {
   // Serve API content for api_status
   $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
-    // console.log(data);
-    // console.log(data['status']);
     if (data['status'] === 'OK') {
       $('DIV#api_status').addClass('available');
     } else {
@@ -21,7 +19,6 @@ $(function () {
     let arr = '';
     let separator = '';
     for (let i in dict) {
-      // console.log(i);
       arr += separator;
       arr += dict[i];
       separator = ', ';
@@ -31,7 +28,6 @@ $(function () {
 
   // Search when button is clicked
   $('button').click(function () {
-    console.log('dict: ' + JSON.stringify(dict));
     let amenityIdList = [];
     for (let i in dict) {
       amenityIdList.push(i);
@@ -43,7 +39,6 @@ $(function () {
       url: 'http://0.0.0.0:5001/api/v1/places_search/',
       data: JSON.stringify(postDict),
       success: function (result) {
-        console.log('POST result: ' + JSON.stringify(result));
         $("article").remove();
         for (let i in result) {
           let structure = [
