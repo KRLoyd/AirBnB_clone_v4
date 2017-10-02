@@ -6,9 +6,7 @@ $(function () {
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     data: JSON.stringify(myDict),
     success: function (result) {
-      console.log(result);
       for (let i in result) {
-        console.log(result[i].description);
         let structure = [
           '<article>',
           '<div class="title">',
@@ -46,8 +44,6 @@ $(function () {
 
   // Serve API content for api_status
   $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
-    console.log(data);
-    console.log(data['status']);
     if (data['status'] === 'OK') {
       $('DIV#api_status').addClass('available');
     } else {
@@ -66,7 +62,6 @@ $(function () {
     let arr = '';
     let separator = '';
     for (let i in dict) {
-      console.log(i);
       arr += separator;
       arr += dict[i];
       separator = ', ';

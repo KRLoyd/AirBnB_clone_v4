@@ -22,7 +22,6 @@ $(function () {
       arr += dict[i];
       separator = ', ';
     }
-    console.log('arr: ' + JSON.stringify(arr));
     if (arr === '') {
       $('div.amenities h4').text(String.fromCharCode(160));
     } else {

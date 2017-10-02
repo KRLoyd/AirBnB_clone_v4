@@ -10,7 +10,6 @@ $(function () {
     let arr = '';
     let separator = '';
     for (let i in dict) {
-      console.log(i);
       arr += separator;
       arr += dict[i];
       separator = ', ';
