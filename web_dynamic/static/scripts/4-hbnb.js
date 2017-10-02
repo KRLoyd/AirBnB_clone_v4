@@ -22,8 +22,8 @@ $(function () {
       arr += dict[i];
       separator = ', ';
     }
-    console.log("arr: " + JSON.stringify(arr));
-    if (arr == '') {
+    console.log('arr: ' + JSON.stringify(arr));
+    if (arr === '') {
       $('div.amenities h4').text(String.fromCharCode(160));
     } else {
       $('div.amenities h4').text(arr);
@@ -43,7 +43,7 @@ $(function () {
       url: 'http://0.0.0.0:5001/api/v1/places_search/',
       data: JSON.stringify(postDict),
       success: function (result) {
-        $("article").remove();
+        $('article').remove();
         for (let i in result) {
           let structure = [
             '<article>',
