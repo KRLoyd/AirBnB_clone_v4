@@ -7,7 +7,6 @@ $(function () {
       $('DIV#api_status').removeClass('available');
     }
   });
-
   // checkbox and display amenities
   let dict = {};
   $('input').change(function () {
@@ -23,7 +22,12 @@ $(function () {
       arr += dict[i];
       separator = ', ';
     }
-    $('div.amenities h4').text(arr);
+    console.log("arr: " + JSON.stringify(arr));
+    if (arr == '') {
+      $('div.amenities h4').text(String.fromCharCode(160));
+    } else {
+      $('div.amenities h4').text(arr);
+    }
   });
 
   // Search when button is clicked
